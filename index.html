@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vino Cado - Grossiste en vin et événementiel d'entreprise</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Styles généraux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* En-tête et navigation */
+        header {
+            background-color: rgba(94, 11, 21, 0.9);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+        
+        header.scrolled {
+            background-color: #5e0b15;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: #d4af37;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #d4af37;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Section héros avec vidéo */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+        
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            object-fit: cover;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            padding: 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 35px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #d4af37;
+            color: #5e0b15;
+            padding: 14px 35px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid #d4af37;
+        }
+        
+        .btn:hover {
+            background-color: transparent;
+            color: #d4af37;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            margin-left: 15px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: white;
+            color: #5e0b15;
+        }
+        
+        /* Sections principales */
+        section {
+            padding: 80px 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #5e0b15;
+            position: relative;
+            font-size: 2.2rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #d4af37;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            margin-bottom: 60px;
+            color: #666;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        
+        /* Cartes de contenu */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            background-color: #5e0b15;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .card-header h2 {
+            font-size: 1.6rem;
+            margin: 0;
+        }
+        
+        .card-body {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-body h3 {
+            color: #5e0b15;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        
+        .card-body p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        /* Section avantages */
+        .advantages {
+            background-color: #f5f0e6;
+        }
+        
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .advantage-item {
+            text-align: center;
+            padding: 30px 25px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .advantage-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .advantage-item i {
+            font-size: 3rem;
+            color: #d4af37;
+            margin-bottom: 20px;
+        }
+        
+        .advantage-item h3 {
+            color: #5e0b15;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        /* Section équipe */
+        .team {
+            background-color: #fff;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .team-member {
+            text-align: center;
+            background: #f9f9f9;
+            padding: 30px 20px;
+            border-radius: 10px;
+            border-top: 5px solid #5e0b15;
+            transition: all 0.3s;
+        }
+        
+        .team-member:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-5px);
+        }
+        
+        .team-member h4 {
+            margin-top: 20px;
+            color: #5e0b15;
+            font-size: 1.2rem;
+        }
+        
+        .team-member p {
+            color: #666;
+            font-style: italic;
+            margin-top: 5px;
+        }
+        
+        /* Section vigneron */
+        .vignerons {
+            background-color: #f5f0e6;
+        }
+        
+        .vignerons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .vigneron-item {
+            background: white;
+            padding: 25px 20px;
+            border-radius: 10px;
+            border-left: 5px solid #5e0b15;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .vigneron-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Section valeurs */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .value-item {
+            text-align: center;
+            padding: 40px 25px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border-top: 5px solid #5e0b15;
+            transition: all 0.3s;
+        }
+        
+        .value-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .value-item i {
+            font-size: 3rem;
+            color: #5e0b15;
+            margin-bottom: 25px;
+        }
+        
+        .value-item h3 {
+            color: #5e0b15;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        /* Pied de page */
+        footer {
+            background-color: #2c0a0f;
+            color: white;
+            padding: 70px 20px 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            color: #d4af37;
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #d4af37;
+        }
+        
+        .footer-column p {
+            color: #ddd;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-column ul li a i {
+            margin-right: 10px;
+            color: #d4af37;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #d4af37;
+            transform: translateX(5px);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: #d4af37;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.95rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .btn-container {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .btn-secondary {
+                margin-left: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: #5e0b15;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 12px 0;
+            }
+            
+            .hero {
+                min-height: 500px;
+                height: 80vh;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            section {
+                padding: 60px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                height: 70vh;
+                min-height: 400px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .content-grid, .advantages-grid, .team-grid, .vignerons-grid, .values-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête et navigation -->
+    <header id="mainHeader">
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-wine-glass-alt"></i>
+                <span>VINO CADO</span>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul id="mainMenu">
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#avantages">Avantages</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#equipe">Équipe</a></li>
+                    <li><a href="#vignerons">Vignerons</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Section héros avec vidéo -->
+    <section class="hero" id="accueil">
+        <!-- Vidéo d'arrière-plan -->
+        <video autoplay muted loop playsinline class="video-background">
+            <!-- Remplacez cette source par la vidéo originale de Vinocado si disponible -->
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-wine-bottle-and-glasses-on-a-wooden-table-43367-large.mp4" type="video/mp4">
+            <!-- Source de secours -->
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-wine-bottle-and-glasses-on-a-wooden-table-43367-large.webm" type="video/webm">
+            Votre navigateur ne supporte pas les vidéos HTML5.
+        </video>
+        
+        <!-- Overlay pour assombrir la vidéo -->
+        <div class="video-overlay"></div>
+        
+        <!-- Contenu du héros -->
+        <div class="container hero-content">
+            <h1>Grossiste en vin et événementiel d'entreprise</h1>
+            <p>VINO CADO : NÉGOCIANT ET GROSSISTE EN VIN, CHAMPAGNE, SPIRITUEUX ET PRODUITS FINS MAIS AUSSI SPÉCIALISTE EN ÉVÉNEMENTIEL D'ENTREPRISE ET EN ŒNOTOURISME D'AFFAIRE</p>
+            <div class="btn-container">
+                <a href="#services" class="btn">Découvrir nos services</a>
+                <a href="#contact" class="btn btn-secondary">Nous contacter</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section avantages -->
+    <section class="advantages" id="avantages">
+        <div class="container">
+            <h2 class="section-title">Nos avantages</h2>
+            <p class="section-subtitle">Nous goûtons et sélectionnons plus de 2 000 vins et produits fins par an : vins, champagnes, spiritueux, foie gras, chocolats… Nos producteurs sont aussi bien de petits producteurs que de grandes marques, qui contribuent au développement durable de leur région.</p>
+            
+            <div class="advantages-grid">
+                <div class="advantage-item">
+                    <i class="fas fa-wine-bottle"></i>
+                    <h3>SÉLECTION RIGOUREUSE</h3>
+                    <p>Nous sélectionnons des vins et produits gourmands avec une exigence absolue de qualité et d'authenticité.</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <i class="fas fa-truck-moving"></i>
+                    <h3>SPÉCIALISTE TRANSPORT - LOGISTIQUE</h3>
+                    <p>Service logistique optimisé pour les vins et produits gourmands avec des conditionnements adaptés à chaque besoin.</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <i class="fas fa-users"></i>
+                    <h3>EXPERTS PASSIONNÉS</h3>
+                    <p>Notre équipe d'experts passionnés vous conseille pour choisir les meilleurs produits selon vos besoins.</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <i class="fas fa-award"></i>
+                    <h3>LEADER DU MARCHÉ</h3>
+                    <p>Leader sur notre marché, nous trouvons les meilleurs vins dans chaque appellation, au meilleur prix.</p>
+                </div>
+            </div>
+            
+            <div class="content-card" style="margin-top: 50px;">
+                <div class="card-header">
+                    <h2>NOTRE RAISON D'ÊTRE ET NOS VALEURS</h2>
+                </div>
+                <div class="card-body">
+                    <p>Le secteur du vin et de la gastronomie est en évolution constante et en plein renouveau. Le changement climatique implique des modifications profondes d'habitudes et de mode de consommation. La transmission des connaissances autour du vin n'est plus assurée comme avant. Vous recherchez un conseil plus adapté et plus pertinent. Vino Cado par sa structure innovante, sa spécialisation et ses valeurs, se fait fort de répondre à ces attentes.</p>
+                    <p>Vino Cado est le premier spécialiste en France à réunir les métiers de marchand de vin, de l'événementiel œnologique et de l'œnotourisme d'affaire. Profitez des synergies évidentes qui sont ainsi concrétisées et adaptées aux entreprises.</p>
+                    <p>Nos valeurs ? Le partage des émotions, l'amour du goût, le bien-être et la satisfaction de nos clients, de nos vignerons et de notre équipe, en harmonie avec nos responsabilités sociales et environnementales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section services -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Nos offres</h2>
+            <p class="section-subtitle">VENTE DE VIN EN GROS • FORMATION ŒNOLOGIQUE PROFESSIONNELLE • CONSULTING</p>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h2>Votre Grossiste en Vin de Confiance</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>Chez Vino Cado, nous sommes bien plus qu'un simple grossiste en vin. Nous sommes votre partenaire stratégique dans l'univers autour du vin. Nous vous offrons une gamme complète de services pour répondre aux besoins spécifiques des professionnels.</p>
+                        <h3>Nos Services</h3>
+                        <p><strong>Approvisionnement en Vin et Champagne :</strong> En tant que grossiste en vin, nous vous donnons accès à une sélection exceptionnelle de vin et champagne de qualité, soigneusement choisis pour satisfaire les palais les plus exigeants.</p>
+                        <p><strong>Conseils Œnologiques :</strong> Nos experts en vin sont à votre disposition pour vous conseiller sur les meilleurs choix de vins pour vos événements ou pour votre entreprise.</p>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-header">
+                        <h2>Cadeaux d'Affaires Champagne, Vin et Spiritueux</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>À la recherche de cadeaux d'affaires marquants et authentiques ? Découvrez nos solutions professionnelles. Chez Vino Cado, nous nous engageons à vous offrir bien plus qu'un simple présent.</p>
+                        <h3>Nos Offres</h3>
+                        <p><strong>Coffrets Champagne, Vin et Spiritueux :</strong> Explorez notre sélection exclusive de coffrets d'exception autour du champagne, vin et spiritueux, parfaitement adaptés pour marquer les moments importants avec élégance et raffinement.</p>
+                        <p><strong>Paniers Gourmands :</strong> Découvrez nos paniers gourmands, une expérience de dégustation authentique. Ils débordent de produits fins et délicieux, sélectionnés avec soin.</p>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-header">
+                        <h2>Événementiel d'entreprise</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>Découvrez une expérience événementiel d'entreprise incomparable avec Vino Cado. Nous vous invitons à plonger dans un univers d'élégance, d'authenticité et d'émotions sensorielles.</p>
+                        <h3>Nos Services</h3>
+                        <p><strong>Événements sur Mesure :</strong> De la conception à la réalisation, notre équipe dévouée travaille en étroite collaboration avec vous pour créer des événements sur mesure qui reflètent votre identité d'entreprise.</p>
+                        <p><strong>Animations Œnologiques :</strong> ANIMATION ŒNOLOGIQUE • TEAM BUILDING ŒNOLOGIQUE • COURS D'ŒNOLOGIE</p>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-header">
+                        <h2>L'Oenotourisme d'affaire selon Vino Cado</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>Plongez dans l'univers captivant de l'oenotourisme d'entreprise avec Vino Cado. Forts de notre connaissance approfondie autour du vin et de nos solides relations avec les vignerons.</p>
+                        <h3>Nos Services</h3>
+                        <p><strong>Séminaire autour du vin :</strong> Chez Vino Cado, nous sommes passionnés par l'art de partager notre amour du vin avec les entreprises. Nos séminaires d'entreprise sur mesure allient la découverte des vins et champagnes à des activités ludiques et instructives.</p>
+                        <p><strong>SÉMINAIRE D'ENTREPRISE • ROADSHOW • SEJOUR ŒNOLOGIQUE</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section valeurs -->
+    <section class="values">
+        <div class="container">
+            <h2 class="section-title">Nos Valeurs Fondamentales</h2>
+            
+            <div class="values-grid">
+                <div class="value-item">
+                    <i class="fas fa-handshake"></i>
+                    <h3>CONFIANCE</h3>
+                    <p>En direct du producteur, nous travaillons main dans la main avec des vignerons pour entretenir une relation vertueuse et pérenne.</p>
+                </div>
+                
+                <div class="value-item">
+                    <i class="fas fa-leaf"></i>
+                    <h3>ENGAGEMENT</h3>
+                    <p>Nous mettons en avant des vignerons engagés dans des démarches environnementales & soucieux de pratiquer une viticulture durable.</p>
+                </div>
+                
+                <div class="value-item">
+                    <i class="fas fa-globe-europe"></i>
+                    <h3>RESPONSABILITÉ</h3>
+                    <p>Nous réduisons les coûts de transport ainsi que les émissions de CO2 grâce à notre mode de distribution optimisé.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section équipe -->
+    <section class="team" id="equipe">
+        <div class="container">
+            <h2 class="section-title">NOTRE ÉQUIPE ET NOS EXPERTS</h2>
+            <p class="section-subtitle">Nous sommes filles ou fils de vigneron ou nouveaux venus dans le secteur, mais nous partageons tous la passion du vin qui nous anime au quotidien.</p>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <i class="fas fa-user-tie" style="font-size: 3.5rem; color: #5e0b15;"></i>
+                    <h4>Ghislain PAGÈS</h4>
+                    <p>Directeur</p>
+                </div>
+                
+                <div class="team-member">
+                    <i class="fas fa-user-tie" style="font-size: 3.5rem; color: #5e0b15;"></i>
+                    <h4>Yana LACASA YAKUSHENKO</h4>
+                    <p>General Manager</p>
+                </div>
+                
+                <div class="team-member">
+                    <i class="fas fa-user" style="font-size: 3.5rem; color: #5e0b15;"></i>
+                    <h4>Lucile GUEYRAUD</h4>
+                    <p>Responsable ADV et Manager BtoC</p>
+                </div>
+                
+                <div class="team-member">
+                    <i class="fas fa-user" style="font-size: 3.5rem; color: #5e0b15;"></i>
+                    <h4>Salomé ROUSSY</h4>
+                    <p>Responsable Évènementiel</p>
+                </div>
+                
+                <div class="team-member">
+                    <i class="fas fa-user" style="font-size: 3.5rem; color: #5e0b15;"></i>
+                    <h4>Emma LEDDA</h4>
+                    <p>Chef de projet évènementiel</p>
+                </div>
+                
+                <div class="team-member">
+                    <i class="fas fa-user" style="font-size: 3.5rem; color: #5e0b15;"></i>
+                    <h4>Shana SABEG</h4>
+                    <p>Chargée de communication</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section vignerons -->
+    <section class="vignerons" id="vignerons">
+        <div class="container">
+            <h2 class="section-title">NOS VIGNERONS ET NOS PRODUCTEURS</h2>
+            <p class="section-subtitle">Nous sélectionnons avant tout les vins qui nous apportent une vraie émotion ! Nos vignerons travaillent en biodynamie ou en conventionnel, en famille ou en groupement de vignerons, mais toujours avec une démarche de développement durable en contribuant au développement harmonieux de leur région.</p>
+            
+            <div class="vignerons-grid">
+                <div class="vigneron-item">
+                    <h4>Château d'Anglès</h4>
+                    <p>Vianney voit La clape en biodynamie</p>
+                </div>
+                
+                <div class="vigneron-item">
+                    <h4>Château Lascaux</h4>
+                    <p>Jean-Benoît - la 14ème génération au sommet</p>
+                </div>
+                
+                <div class="vigneron-item">
+                    <h4>Domaine André Berthet Rayne</h4>
+                    <p>la pépite de Cairanne</p>
+                </div>
+                
+                <div class="vigneron-item">
+                    <h4>Domaine l'Arpenty</h4>
+                    <p>le meilleur du bio à Chinon</p>
+                </div>
+                
+                <div class="vigneron-item">
+                    <h4>Meyer Fonné</h4>
+                    <p>Félix notre artiste alsacien</p>
+                </div>
+                
+                <div class="vigneron-item">
+                    <h4>Château Mongravey</h4>
+                    <p>Karin l'enchanteresse de Margaux</p>
+                </div>
+                
+                <div class="vigneron-item">
+                    <h4>Domaine Naïs</h4>
+                    <p>La pépite familiale en Provence</p>
+                </div>
+                
+                <div class="vigneron-item">
+                    <h4>Château Noaillac</h4>
+                    <p>Damien grand vigneron du Médoc</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>VINO CADO</h3>
+                    <p>Grossiste en vin et événementiel d'entreprise</p>
+                    <p>Négociant et grossiste en vin, champagne, spiritueux et produits fins.</p>
+                    <p>Spécialiste en événementiel d'entreprise et en œnotourisme d'affaire.</p>
+                    
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Nos Services</h3>
+                    <ul>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Vente de vin en gros</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Formation œnologique</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Consulting</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Coffrets cadeaux</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Événementiel d'entreprise</a></li>
+                        <li><a href="#services"><i class="fas fa-chevron-right"></i> Œnotourisme d'affaire</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> France</p>
+                    <p><i class="fas fa-phone" style="margin-right: 10px;"></i> +33 (0)X XX XX XX XX</p>
+                    <p><i class="fas fa-envelope" style="margin-right: 10px;"></i> contact@vinocado.fr</p>
+                    <p><i class="fas fa-clock" style="margin-right: 10px;"></i> Lun-Ven: 9h-18h</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 VINO CADO - Tous droits réservés | Grossiste en vin et événementiel d'entreprise</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mainMenu').classList.toggle('show');
+        });
+        
+        // Fermer le menu mobile en cliquant sur un lien
+        const menuLinks = document.querySelectorAll('#mainMenu a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mainMenu').classList.remove('show');
+            });
+        });
+        
+        // Animation de l'en-tête au défilement
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('mainHeader');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            // Animation des sections au défilement
+            const sections = document.querySelectorAll('section:not(.hero)');
+            const windowHeight = window.innerHeight;
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < windowHeight - 100) {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        });
+        
+        // Contrôle de la vidéo
+        const video = document.querySelector('.video-background');
+        
+        // Redémarrer la vidéo si elle se bloque (pour certains navigateurs mobiles)
+        video.addEventListener('ended', function() {
+            this.currentTime = 0;
+            this.play();
+        });
+        
+        // Gestion du son (muet par défaut)
+        video.muted = true;
+        
+        // Initialisation des animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section:not(.hero)');
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            });
+            
+            // Déclencher l'animation initiale
+            setTimeout(() => {
+                window.dispatchEvent(new Event('scroll'));
+            }, 100);
+            
+            // Démarrer la vidéo
+            video.play().catch(e => {
+                console.log("La lecture automatique de la vidéo a été bloquée:", e);
+            });
+        });
+    </script>
+</body>
+</html>
