@@ -6,7 +6,7 @@
     <title>Vino Cado - Grossiste en vin et événementiel d'entreprise</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Styles généraux */
+        /* ===== RESET ET STYLES DE BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -18,7 +18,6 @@
             line-height: 1.6;
             color: #333;
             background-color: #f9f9f9;
-            overflow-x: hidden;
         }
         
         .container {
@@ -28,20 +27,23 @@
             padding: 0 20px;
         }
         
-        /* En-tête et navigation */
+        /* ===== HEADER ===== */
         header {
-            background-color: rgba(94, 11, 21, 0.9);
+            background-color: rgba(94, 11, 21, 0.95);
             color: white;
-            padding: 15px 0;
-            position: sticky;
+            padding: 18px 0;
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
             z-index: 1000;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
         }
         
         header.scrolled {
+            padding: 12px 0;
             background-color: #5e0b15;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
         .header-container {
@@ -51,15 +53,17 @@
         }
         
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
+            font-size: 1.9rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
+            letter-spacing: 0.5px;
         }
         
         .logo i {
-            margin-right: 10px;
+            margin-right: 12px;
             color: #d4af37;
+            font-size: 2rem;
         }
         
         nav ul {
@@ -68,18 +72,36 @@
         }
         
         nav ul li {
-            margin-left: 25px;
+            margin-left: 30px;
+            position: relative;
         }
         
         nav ul li a {
             color: white;
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+            padding: 5px 0;
         }
         
         nav ul li a:hover {
             color: #d4af37;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #d4af37;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
         }
         
         .mobile-menu-btn {
@@ -87,88 +109,103 @@
             background: none;
             border: none;
             color: white;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
+            padding: 5px;
         }
         
-        /* Section héros avec vidéo */
-        .hero {
+        /* ===== SECTION HÉROS AVEC VIDÉO ===== */
+        .hero-section {
             position: relative;
             height: 100vh;
-            min-height: 600px;
+            min-height: 700px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
             overflow: hidden;
+            margin-top: 0;
         }
         
-        .video-background {
+        /* VIDÉO EN ARRIÈRE-PLAN */
+        .hero-video {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
             object-fit: cover;
+            z-index: -2;
         }
         
+        /* OVERLAY POUR ASSOMBRIR LA VIDÉO */
         .video-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
             z-index: -1;
         }
         
         .hero-content {
             position: relative;
             z-index: 1;
-            max-width: 900px;
-            padding: 20px;
+            max-width: 1000px;
+            padding: 40px;
+            background-color: rgba(94, 11, 21, 0.15);
+            backdrop-filter: blur(3px);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .hero h1 {
-            font-size: 3.2rem;
+        .hero-content h1 {
+            font-size: 3.8rem;
             margin-bottom: 25px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-            line-height: 1.2;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+            line-height: 1.1;
+            font-weight: 800;
         }
         
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 35px;
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+            line-height: 1.5;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .btn {
             display: inline-block;
             background-color: #d4af37;
             color: #5e0b15;
-            padding: 14px 35px;
+            padding: 16px 40px;
             text-decoration: none;
             border-radius: 4px;
-            font-weight: bold;
-            font-size: 1.1rem;
+            font-weight: 700;
+            font-size: 1.2rem;
             transition: all 0.3s;
             border: 2px solid #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 10px;
         }
         
         .btn:hover {
             background-color: transparent;
             color: #d4af37;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
         
         .btn-secondary {
             background-color: transparent;
             color: white;
             border: 2px solid white;
-            margin-left: 15px;
         }
         
         .btn-secondary:hover {
@@ -176,54 +213,55 @@
             color: #5e0b15;
         }
         
-        /* Sections principales */
+        /* ===== SECTIONS PRINCIPALES ===== */
         section {
-            padding: 80px 20px;
+            padding: 100px 20px;
         }
         
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             color: #5e0b15;
             position: relative;
-            font-size: 2.2rem;
+            font-size: 2.8rem;
+            font-weight: 700;
         }
         
         .section-title:after {
             content: '';
             position: absolute;
-            bottom: -15px;
+            bottom: -20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
+            width: 100px;
+            height: 5px;
             background-color: #d4af37;
         }
         
         .section-subtitle {
             text-align: center;
-            font-size: 1.3rem;
-            margin-bottom: 60px;
+            font-size: 1.4rem;
+            margin-bottom: 70px;
             color: #666;
-            max-width: 900px;
+            max-width: 1000px;
             margin-left: auto;
             margin-right: auto;
             line-height: 1.6;
         }
         
-        /* Cartes de contenu */
+        /* ===== CARTES DE CONTENU ===== */
         .content-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
             margin-top: 40px;
         }
         
         .content-card {
             background: white;
-            border-radius: 10px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
             transition: all 0.4s;
             height: 100%;
             display: flex;
@@ -232,23 +270,24 @@
         
         .content-card:hover {
             transform: translateY(-15px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
         }
         
         .card-header {
             background-color: #5e0b15;
             color: white;
-            padding: 25px;
+            padding: 30px 25px;
             text-align: center;
         }
         
         .card-header h2 {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             margin: 0;
+            font-weight: 700;
         }
         
         .card-body {
-            padding: 30px;
+            padding: 35px 30px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -257,171 +296,196 @@
         .card-body h3 {
             color: #5e0b15;
             margin-bottom: 20px;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
+            font-weight: 600;
         }
         
         .card-body p {
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             line-height: 1.6;
+            font-size: 1.05rem;
         }
         
-        /* Section avantages */
-        .advantages {
+        /* ===== SECTION AVANTAGES ===== */
+        .advantages-section {
             background-color: #f5f0e6;
+            position: relative;
         }
         
         .advantages-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
             margin-top: 40px;
         }
         
         .advantage-item {
             text-align: center;
-            padding: 30px 25px;
+            padding: 40px 30px;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            border-top: 5px solid #d4af37;
         }
         
         .advantage-item:hover {
             transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
         }
         
         .advantage-item i {
-            font-size: 3rem;
-            color: #d4af37;
-            margin-bottom: 20px;
+            font-size: 3.5rem;
+            color: #5e0b15;
+            margin-bottom: 25px;
         }
         
         .advantage-item h3 {
             color: #5e0b15;
-            margin-bottom: 15px;
-            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
         }
         
-        /* Section équipe */
-        .team {
+        /* ===== SECTION ÉQUIPE ===== */
+        .team-section {
             background-color: #fff;
         }
         
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 35px;
             margin-top: 40px;
         }
         
         .team-member {
             text-align: center;
             background: #f9f9f9;
-            padding: 30px 20px;
-            border-radius: 10px;
+            padding: 35px 25px;
+            border-radius: 12px;
             border-top: 5px solid #5e0b15;
             transition: all 0.3s;
         }
         
         .team-member:hover {
             background-color: #f0f0f0;
-            transform: translateY(-5px);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-member .member-icon {
+            font-size: 4rem;
+            color: #5e0b15;
+            margin-bottom: 20px;
         }
         
         .team-member h4 {
             margin-top: 20px;
             color: #5e0b15;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            font-weight: 600;
         }
         
         .team-member p {
             color: #666;
             font-style: italic;
-            margin-top: 5px;
+            margin-top: 8px;
+            font-size: 1.05rem;
         }
         
-        /* Section vigneron */
-        .vignerons {
+        /* ===== SECTION VIGNERONS ===== */
+        .vignerons-section {
             background-color: #f5f0e6;
         }
         
         .vignerons-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
-        
-        .vigneron-item {
-            background: white;
-            padding: 25px 20px;
-            border-radius: 10px;
-            border-left: 5px solid #5e0b15;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s;
-        }
-        
-        .vigneron-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Section valeurs */
-        .values-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
         
+        .vigneron-item {
+            background: white;
+            padding: 30px 25px;
+            border-radius: 12px;
+            border-left: 5px solid #5e0b15;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .vigneron-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .vigneron-item h4 {
+            color: #5e0b15;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        /* ===== SECTION VALEURS ===== */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
         .value-item {
             text-align: center;
-            padding: 40px 25px;
+            padding: 50px 30px;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
             border-top: 5px solid #5e0b15;
             transition: all 0.3s;
         }
         
         .value-item:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
         }
         
         .value-item i {
-            font-size: 3rem;
+            font-size: 4rem;
             color: #5e0b15;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
         
         .value-item h3 {
             color: #5e0b15;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            font-weight: 700;
         }
         
-        /* Pied de page */
+        /* ===== FOOTER ===== */
         footer {
             background-color: #2c0a0f;
             color: white;
-            padding: 70px 20px 30px;
+            padding: 80px 20px 40px;
         }
         
         .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 50px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 60px;
+            margin-bottom: 60px;
         }
         
         .footer-column h3 {
             color: #d4af37;
-            margin-bottom: 25px;
-            font-size: 1.4rem;
+            margin-bottom: 30px;
+            font-size: 1.6rem;
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
+            font-weight: 700;
         }
         
         .footer-column h3:after {
@@ -429,15 +493,16 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 50px;
-            height: 2px;
+            width: 60px;
+            height: 3px;
             background-color: #d4af37;
         }
         
         .footer-column p {
             color: #ddd;
             line-height: 1.6;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
         }
         
         .footer-column ul {
@@ -445,7 +510,7 @@
         }
         
         .footer-column ul li {
-            margin-bottom: 12px;
+            margin-bottom: 15px;
         }
         
         .footer-column ul li a {
@@ -454,69 +519,90 @@
             transition: all 0.3s;
             display: flex;
             align-items: center;
+            font-size: 1.05rem;
         }
         
         .footer-column ul li a i {
-            margin-right: 10px;
+            margin-right: 12px;
             color: #d4af37;
         }
         
         .footer-column ul li a:hover {
             color: #d4af37;
-            transform: translateX(5px);
+            transform: translateX(10px);
         }
         
         .social-icons {
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 20px;
+            margin-top: 25px;
         }
         
         .social-icons a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background-color: rgba(255, 255, 255, 0.1);
             color: white;
             border-radius: 50%;
             text-decoration: none;
             transition: all 0.3s;
+            font-size: 1.2rem;
         }
         
         .social-icons a:hover {
             background-color: #d4af37;
-            transform: translateY(-3px);
+            transform: translateY(-5px);
         }
         
         .copyright {
             text-align: center;
-            padding-top: 30px;
+            padding-top: 40px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #aaa;
-            font-size: 0.95rem;
+            font-size: 1rem;
         }
         
-        /* Responsive */
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 2.6rem;
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1100px) {
+            .hero-content h1 {
+                font-size: 3.2rem;
             }
             
-            .hero p {
+            .hero-content p {
+                font-size: 1.3rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .hero-section {
+                min-height: 600px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-content p {
                 font-size: 1.2rem;
             }
             
             .btn-container {
                 display: flex;
                 flex-direction: column;
-                gap: 15px;
                 align-items: center;
+                gap: 20px;
             }
             
-            .btn-secondary {
-                margin-left: 0;
+            .btn {
+                width: 80%;
+                max-width: 350px;
             }
         }
         
@@ -527,14 +613,15 @@
             
             nav ul {
                 display: none;
-                position: absolute;
-                top: 70px;
+                position: fixed;
+                top: 80px;
                 left: 0;
                 width: 100%;
                 background-color: #5e0b15;
                 flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                padding: 30px 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                z-index: 999;
             }
             
             nav ul.show {
@@ -542,43 +629,53 @@
             }
             
             nav ul li {
-                margin: 12px 0;
+                margin: 15px 0;
+                text-align: center;
             }
             
-            .hero {
-                min-height: 500px;
+            .hero-section {
                 height: 80vh;
+                min-height: 500px;
             }
             
-            .hero h1 {
-                font-size: 2.2rem;
+            .hero-content {
+                padding: 30px 20px;
             }
             
-            .hero p {
+            .hero-content h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero-content p {
                 font-size: 1.1rem;
             }
             
             .section-title {
-                font-size: 1.8rem;
+                font-size: 2.2rem;
             }
             
             section {
-                padding: 60px 20px;
+                padding: 80px 20px;
             }
         }
         
         @media (max-width: 480px) {
-            .hero {
+            .hero-section {
                 height: 70vh;
                 min-height: 400px;
             }
             
-            .hero h1 {
-                font-size: 1.8rem;
+            .hero-content h1 {
+                font-size: 1.9rem;
             }
             
-            .hero p {
+            .hero-content p {
                 font-size: 1rem;
+                margin-bottom: 30px;
+            }
+            
+            .section-title {
+                font-size: 1.9rem;
             }
             
             .content-grid, .advantages-grid, .team-grid, .vignerons-grid, .values-grid {
@@ -586,22 +683,26 @@
             }
             
             .btn {
-                padding: 12px 25px;
-                font-size: 1rem;
+                padding: 14px 30px;
+                font-size: 1.1rem;
+            }
+            
+            .footer-grid {
+                gap: 40px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- En-tête et navigation -->
+    <!-- ===== HEADER ===== -->
     <header id="mainHeader">
         <div class="container header-container">
             <div class="logo">
-                <i class="fas fa-wine-glass-alt"></i>
-                <span>VINO CADO</span>
+                <i class="fas fa-wine-bottle"></i>
+                <span>LES DELICES DE BRIAND</span>
             </div>
             
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu mobile">
                 <i class="fas fa-bars"></i>
             </button>
             
@@ -618,24 +719,23 @@
         </div>
     </header>
 
-    <!-- Section héros avec vidéo -->
-    <section class="hero" id="accueil">
-        <!-- Vidéo d'arrière-plan -->
-        <video autoplay muted loop playsinline class="video-background">
-            <!-- Remplacez cette source par la vidéo originale de Vinocado si disponible -->
+    <!-- ===== SECTION HÉROS AVEC VIDÉO ===== -->
+    <section class="hero-section" id="accueil">
+        <!-- VIDÉO EN ARRIÈRE-PLAN -->
+        <video autoplay muted loop playsinline class="hero-video" id="heroVideo">
             <source src="https://assets.mixkit.co/videos/preview/mixkit-wine-bottle-and-glasses-on-a-wooden-table-43367-large.mp4" type="video/mp4">
             <!-- Source de secours -->
             <source src="https://assets.mixkit.co/videos/preview/mixkit-wine-bottle-and-glasses-on-a-wooden-table-43367-large.webm" type="video/webm">
-            Votre navigateur ne supporte pas les vidéos HTML5.
+            Votre navigateur ne supporte pas la vidéo HTML5.
         </video>
         
-        <!-- Overlay pour assombrir la vidéo -->
+        <!-- OVERLAY POUR ASSOMBRIR -->
         <div class="video-overlay"></div>
         
-        <!-- Contenu du héros -->
+        <!-- CONTENU PRINCIPAL -->
         <div class="container hero-content">
             <h1>Grossiste en vin et événementiel d'entreprise</h1>
-            <p>VINO CADO : NÉGOCIANT ET GROSSISTE EN VIN, CHAMPAGNE, SPIRITUEUX ET PRODUITS FINS MAIS AUSSI SPÉCIALISTE EN ÉVÉNEMENTIEL D'ENTREPRISE ET EN ŒNOTOURISME D'AFFAIRE</p>
+            <p>LES DELICES DE BRIABD : NÉGOCIANT ET GROSSISTE EN VIN, CHAMPAGNE, SPIRITUEUX ET PRODUITS FINS MAIS AUSSI SPÉCIALISTE EN ÉVÉNEMENTIEL D'ENTREPRISE ET EN ŒNOTOURISME D'AFFAIRE</p>
             <div class="btn-container">
                 <a href="#services" class="btn">Découvrir nos services</a>
                 <a href="#contact" class="btn btn-secondary">Nous contacter</a>
@@ -643,8 +743,8 @@
         </div>
     </section>
 
-    <!-- Section avantages -->
-    <section class="advantages" id="avantages">
+    <!-- ===== SECTION AVANTAGES ===== -->
+    <section class="advantages-section" id="avantages">
         <div class="container">
             <h2 class="section-title">Nos avantages</h2>
             <p class="section-subtitle">Nous goûtons et sélectionnons plus de 2 000 vins et produits fins par an : vins, champagnes, spiritueux, foie gras, chocolats… Nos producteurs sont aussi bien de petits producteurs que de grandes marques, qui contribuent au développement durable de leur région.</p>
@@ -674,21 +774,10 @@
                     <p>Leader sur notre marché, nous trouvons les meilleurs vins dans chaque appellation, au meilleur prix.</p>
                 </div>
             </div>
-            
-            <div class="content-card" style="margin-top: 50px;">
-                <div class="card-header">
-                    <h2>NOTRE RAISON D'ÊTRE ET NOS VALEURS</h2>
-                </div>
-                <div class="card-body">
-                    <p>Le secteur du vin et de la gastronomie est en évolution constante et en plein renouveau. Le changement climatique implique des modifications profondes d'habitudes et de mode de consommation. La transmission des connaissances autour du vin n'est plus assurée comme avant. Vous recherchez un conseil plus adapté et plus pertinent. Vino Cado par sa structure innovante, sa spécialisation et ses valeurs, se fait fort de répondre à ces attentes.</p>
-                    <p>Vino Cado est le premier spécialiste en France à réunir les métiers de marchand de vin, de l'événementiel œnologique et de l'œnotourisme d'affaire. Profitez des synergies évidentes qui sont ainsi concrétisées et adaptées aux entreprises.</p>
-                    <p>Nos valeurs ? Le partage des émotions, l'amour du goût, le bien-être et la satisfaction de nos clients, de nos vignerons et de notre équipe, en harmonie avec nos responsabilités sociales et environnementales.</p>
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- Section services -->
+    <!-- ===== SECTION SERVICES ===== -->
     <section id="services">
         <div class="container">
             <h2 class="section-title">Nos offres</h2>
@@ -700,7 +789,7 @@
                         <h2>Votre Grossiste en Vin de Confiance</h2>
                     </div>
                     <div class="card-body">
-                        <p>Chez Vino Cado, nous sommes bien plus qu'un simple grossiste en vin. Nous sommes votre partenaire stratégique dans l'univers autour du vin. Nous vous offrons une gamme complète de services pour répondre aux besoins spécifiques des professionnels.</p>
+                        <p>Chez Les Délices de Brian, nous sommes bien plus qu'un simple grossiste en vin. Nous sommes votre partenaire stratégique dans l'univers autour du vin. Nous vous offrons une gamme complète de services pour répondre aux besoins spécifiques des professionnels.</p>
                         <h3>Nos Services</h3>
                         <p><strong>Approvisionnement en Vin et Champagne :</strong> En tant que grossiste en vin, nous vous donnons accès à une sélection exceptionnelle de vin et champagne de qualité, soigneusement choisis pour satisfaire les palais les plus exigeants.</p>
                         <p><strong>Conseils Œnologiques :</strong> Nos experts en vin sont à votre disposition pour vous conseiller sur les meilleurs choix de vins pour vos événements ou pour votre entreprise.</p>
@@ -733,7 +822,7 @@
                 
                 <div class="content-card">
                     <div class="card-header">
-                        <h2>L'Oenotourisme d'affaire selon Vino Cado</h2>
+                        <h2>L'Oenotourisme d'affaire selon les délices de briand</h2>
                     </div>
                     <div class="card-body">
                         <p>Plongez dans l'univers captivant de l'oenotourisme d'entreprise avec Vino Cado. Forts de notre connaissance approfondie autour du vin et de nos solides relations avec les vignerons.</p>
@@ -746,8 +835,8 @@
         </div>
     </section>
 
-    <!-- Section valeurs -->
-    <section class="values">
+    <!-- ===== SECTION VALEURS ===== -->
+    <section class="values-section">
         <div class="container">
             <h2 class="section-title">Nos Valeurs Fondamentales</h2>
             
@@ -773,45 +862,45 @@
         </div>
     </section>
 
-    <!-- Section équipe -->
-    <section class="team" id="equipe">
+    <!-- ===== SECTION ÉQUIPE ===== -->
+    <section class="team-section" id="equipe">
         <div class="container">
             <h2 class="section-title">NOTRE ÉQUIPE ET NOS EXPERTS</h2>
             <p class="section-subtitle">Nous sommes filles ou fils de vigneron ou nouveaux venus dans le secteur, mais nous partageons tous la passion du vin qui nous anime au quotidien.</p>
             
             <div class="team-grid">
                 <div class="team-member">
-                    <i class="fas fa-user-tie" style="font-size: 3.5rem; color: #5e0b15;"></i>
+                    <i class="fas fa-user-tie member-icon"></i>
                     <h4>Ghislain PAGÈS</h4>
                     <p>Directeur</p>
                 </div>
                 
                 <div class="team-member">
-                    <i class="fas fa-user-tie" style="font-size: 3.5rem; color: #5e0b15;"></i>
+                    <i class="fas fa-user-tie member-icon"></i>
                     <h4>Yana LACASA YAKUSHENKO</h4>
                     <p>General Manager</p>
                 </div>
                 
                 <div class="team-member">
-                    <i class="fas fa-user" style="font-size: 3.5rem; color: #5e0b15;"></i>
+                    <i class="fas fa-user member-icon"></i>
                     <h4>Lucile GUEYRAUD</h4>
                     <p>Responsable ADV et Manager BtoC</p>
                 </div>
                 
                 <div class="team-member">
-                    <i class="fas fa-user" style="font-size: 3.5rem; color: #5e0b15;"></i>
+                    <i class="fas fa-user member-icon"></i>
                     <h4>Salomé ROUSSY</h4>
                     <p>Responsable Évènementiel</p>
                 </div>
                 
                 <div class="team-member">
-                    <i class="fas fa-user" style="font-size: 3.5rem; color: #5e0b15;"></i>
+                    <i class="fas fa-user member-icon"></i>
                     <h4>Emma LEDDA</h4>
                     <p>Chef de projet évènementiel</p>
                 </div>
                 
                 <div class="team-member">
-                    <i class="fas fa-user" style="font-size: 3.5rem; color: #5e0b15;"></i>
+                    <i class="fas fa-user member-icon"></i>
                     <h4>Shana SABEG</h4>
                     <p>Chargée de communication</p>
                 </div>
@@ -819,8 +908,8 @@
         </div>
     </section>
 
-    <!-- Section vignerons -->
-    <section class="vignerons" id="vignerons">
+    <!-- ===== SECTION VIGNERONS ===== -->
+    <section class="vignerons-section" id="vignerons">
         <div class="container">
             <h2 class="section-title">NOS VIGNERONS ET NOS PRODUCTEURS</h2>
             <p class="section-subtitle">Nous sélectionnons avant tout les vins qui nous apportent une vraie émotion ! Nos vignerons travaillent en biodynamie ou en conventionnel, en famille ou en groupement de vignerons, mais toujours avec une démarche de développement durable en contribuant au développement harmonieux de leur région.</p>
@@ -869,12 +958,12 @@
         </div>
     </section>
 
-    <!-- Pied de page -->
+    <!-- ===== FOOTER ===== -->
     <footer id="contact">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-column">
-                    <h3>VINO CADO</h3>
+                    <h3>LES DELICES DE BRIAN</h3>
                     <p>Grossiste en vin et événementiel d'entreprise</p>
                     <p>Négociant et grossiste en vin, champagne, spiritueux et produits fins.</p>
                     <p>Spécialiste en événementiel d'entreprise et en œnotourisme d'affaire.</p>
@@ -901,10 +990,10 @@
                 
                 <div class="footer-column">
                     <h3>Contact</h3>
-                    <p><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i> France</p>
-                    <p><i class="fas fa-phone" style="margin-right: 10px;"></i> +33 (0)X XX XX XX XX</p>
-                    <p><i class="fas fa-envelope" style="margin-right: 10px;"></i> contact@vinocado.fr</p>
-                    <p><i class="fas fa-clock" style="margin-right: 10px;"></i> Lun-Ven: 9h-18h</p>
+                    <p><i class="fas fa-map-marker-alt"></i> France</p>
+                    <p><i class="fas fa-phone"></i> +33 (0)X XX XX XX XX</p>
+                    <p><i class="fas fa-envelope"></i> contact@lesdelicesdebriand.fr</p>
+                    <p><i class="fas fa-clock"></i> Lun-Ven: 9h-18h</p>
                 </div>
             </div>
             
@@ -915,70 +1004,101 @@
     </footer>
 
     <script>
-        // Menu mobile
-        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-            document.getElementById('mainMenu').classList.toggle('show');
+        // ===== MENU MOBILE =====
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainMenu = document.getElementById('mainMenu');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mainMenu.classList.toggle('show');
+            // Changement d'icône
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
         });
         
-        // Fermer le menu mobile en cliquant sur un lien
+        // Fermer le menu en cliquant sur un lien
         const menuLinks = document.querySelectorAll('#mainMenu a');
         menuLinks.forEach(link => {
             link.addEventListener('click', function() {
-                document.getElementById('mainMenu').classList.remove('show');
+                mainMenu.classList.remove('show');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
             });
         });
         
-        // Animation de l'en-tête au défilement
+        // ===== HEADER SCROLL EFFECT =====
+        const header = document.getElementById('mainHeader');
+        
         window.addEventListener('scroll', function() {
-            const header = document.getElementById('mainHeader');
             if (window.scrollY > 50) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
             }
-            
-            // Animation des sections au défilement
-            const sections = document.querySelectorAll('section:not(.hero)');
-            const windowHeight = window.innerHeight;
-            
-            sections.forEach(section => {
-                const sectionTop = section.getBoundingClientRect().top;
-                if (sectionTop < windowHeight - 100) {
-                    section.style.opacity = '1';
-                    section.style.transform = 'translateY(0)';
-                }
-            });
         });
         
-        // Contrôle de la vidéo
-        const video = document.querySelector('.video-background');
+        // ===== GESTION DE LA VIDÉO =====
+        const heroVideo = document.getElementById('heroVideo');
         
-        // Redémarrer la vidéo si elle se bloque (pour certains navigateurs mobiles)
-        video.addEventListener('ended', function() {
+        // Redémarrer la vidéo si elle s'arrête
+        heroVideo.addEventListener('ended', function() {
             this.currentTime = 0;
             this.play();
         });
         
-        // Gestion du son (muet par défaut)
-        video.muted = true;
-        
-        // Initialisation des animations
+        // Gestion de la lecture automatique sur mobile
         document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('section:not(.hero)');
-            sections.forEach(section => {
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(30px)';
-                section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            // Essayer de jouer la vidéo
+            const playPromise = heroVideo.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("Lecture automatique bloquée, ajout d'un bouton de lecture");
+                    // Ajouter un bouton de lecture si nécessaire
+                });
+            }
+            
+            // Animation au défilement pour les sections
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observer toutes les sections
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
             });
-            
-            // Déclencher l'animation initiale
-            setTimeout(() => {
-                window.dispatchEvent(new Event('scroll'));
-            }, 100);
-            
-            // Démarrer la vidéo
-            video.play().catch(e => {
-                console.log("La lecture automatique de la vidéo a été bloquée:", e);
+        });
+        
+        // ===== ANIMATION DES LIENS =====
+        // Smooth scroll pour les ancres
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
     </script>
